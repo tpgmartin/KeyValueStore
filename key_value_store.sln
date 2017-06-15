@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "key_value_store", "key_value_store\key_value_store.csproj", "{D20C4F6C-129B-4C76-8874-6D7852AA3B25}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D20C4F6C-129B-4C76-8874-6D7852AA3B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D20C4F6C-129B-4C76-8874-6D7852AA3B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D20C4F6C-129B-4C76-8874-6D7852AA3B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D20C4F6C-129B-4C76-8874-6D7852AA3B25}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
