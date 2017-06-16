@@ -8,7 +8,7 @@ namespace KeyValueStore.Services
     {
         KeyValue Add(KeyValue keyValue);
         IEnumerable<KeyValue> GetAll();
-        KeyValue GetById(int id);
+        KeyValue GetByKey(string key);
         void Delete(KeyValue keyValue);
         void Update(KeyValue keyValue);
     }

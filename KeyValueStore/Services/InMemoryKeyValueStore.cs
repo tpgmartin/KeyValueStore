@@ -17,7 +17,6 @@ namespace KeyValueStore.Services
         {
             var addedKeyValue = _context.Add(keyValue);
             _context.SaveChanges();
-            keyValue.Id = addedKeyValue.Entity.Id;
 
             return keyValue;
         }
@@ -33,15 +32,14 @@ namespace KeyValueStore.Services
             return _context.KeyValues.ToList();
         }
 
-        public KeyValue GetById(int id)
+        public KeyValue GetByKey(string key)
         {
-            return _context.KeyValues.SingleOrDefault(x => x.Id == id);
+            return _context.KeyValues.SingleOrDefault(x => x.Key == key);
         }
 
         public void Update(KeyValue keyValue)
         {
-            var keyValueToUpdate = GetById(keyValue.Id);
-            keyValueToUpdate.Key = keyValue.Key;
+            var keyValueToUpdate = GetByKey(keyValue.Key);
 			keyValueToUpdate.Value = keyValue.Value;
             keyValueToUpdate.LastUpdated = keyValue.LastUpdated;
 			_context.Update(keyValueToUpdate);

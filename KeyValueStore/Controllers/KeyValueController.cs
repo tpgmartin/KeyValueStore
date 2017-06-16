@@ -2,7 +2,9 @@
 using KeyValueStore.Services;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,9 +31,9 @@ namespace KeyValueStore.Controllers
 
         // GET api/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(string key)
         {
-            var keyValue = _keyValueStore.GetById(id);
+            var keyValue = _keyValueStore.GetByKey(key);
             if (keyValue == null)
             {
                 return NotFound();
@@ -48,28 +50,40 @@ namespace KeyValueStore.Controllers
             {
                 return BadRequest();
             }
+            byte[] hash;
+            using (MD5 md5 = MD5.Create())
+            {
+                hash = md5.ComputeHash(Encoding.UTF8.GetBytes(value.Value));
+            }
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < hash.Length; i++)
+			{
+                sb.Append(hash[i].ToString("x2"));
+			}
+            value.Id = Guid.NewGuid();
+            value.Key = sb.ToString();
+            value.LastUpdated = DateTime.Now;
             var createdKeyValue = _keyValueStore.Add(value);
 
-            return CreatedAtRoute("GetKeyValue", new { id = createdKeyValue.Id }, createdKeyValue);
+            return CreatedAtRoute("GetKeyValue", createdKeyValue);
         }
 
         // PUT api/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]KeyValue value)
+        public IActionResult Put(string key, [FromBody]KeyValue value)
         {
             if (value == null)
             {
                 return BadRequest();
             }
 
-            var keyValue = _keyValueStore.GetById(id);
+            var keyValue = _keyValueStore.GetByKey(key);
 
             if (keyValue == null)
             {
                 return NotFound();    
             }
 
-            value.Id = id;
             _keyValueStore.Update(value);
 
             return NoContent();
@@ -77,9 +91,9 @@ namespace KeyValueStore.Controllers
 
         // DELETE api/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string key)
         {
-            var keyValue = _keyValueStore.GetById(id);
+            var keyValue = _keyValueStore.GetByKey(key);
             if (keyValue == null)
             {
                 return NotFound();
