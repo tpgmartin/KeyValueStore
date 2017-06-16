@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "key_value_store", "key_value_store\key_value_store.csproj", "{D20C4F6C-129B-4C76-8874-6D7852AA3B25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyValueStore", "key_value_store\KeyValueStore.csproj", "{D20C4F6C-129B-4C76-8874-6D7852AA3B25}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

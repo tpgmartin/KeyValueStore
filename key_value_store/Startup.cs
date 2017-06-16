@@ -1,14 +1,17 @@
-﻿using System;
+﻿using KeyValueStore.Models;
+using KeyValueStore.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace key_value_store
+namespace KeyValueStore
 {
     public class Startup
     {
@@ -27,6 +30,8 @@ namespace key_value_store
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<KeyValuesAPIContext>(x => x.UseInMemoryDatabase());
+            services.AddTransient<IKeyValueStore, InMemoryKeyValueStore>();
             // Add framework services.
             services.AddMvc();
         }
